@@ -146,8 +146,6 @@ export default definePlugin({
         }
 
     ],
-    patches: [],
-    // Delete these two below if you are only using code patches
     start() {
         addContextMenuPatch("channel-context", voiceChannelContextMenuPatch);
     },
