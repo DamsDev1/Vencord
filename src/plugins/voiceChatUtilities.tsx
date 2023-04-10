@@ -17,8 +17,7 @@
 */
 
 import { addContextMenuPatch, findGroupChildrenByChildId, NavContextMenuPatchCallback, removeContextMenuPatch } from "@api/ContextMenu";
-import { definePluginSettings } from "@api/settings";
-import definePlugin, { OptionType } from "@utils/types";
+import definePlugin from "@utils/types";
 import { findByProps, findStoreLazy } from "@webpack";
 import { Menu, RestAPI, UserStore } from "@webpack/common";
 
@@ -44,7 +43,7 @@ function sendPatch(channel, body, bypass = false) {
 }
 
 const voiceChannelContextMenuPatch: NavContextMenuPatchCallback = (children, props) => {
-    if (!props || (props.channel && !props.channel_bitrate)) return;
+    if (!props || (props.channel && !props.channel.bitrate_)) return;
     const { channel: propsChannel } = props;
 
     var channels = findByProps("getChannels");
@@ -157,4 +156,3 @@ export default definePlugin({
         removeContextMenuPatch("channel-context", voiceChannelContextMenuPatch);
     },
 });
-
